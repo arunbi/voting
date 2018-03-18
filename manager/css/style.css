@@ -16,7 +16,7 @@ body {font-family:"NotoSans"; background-color: #FFFFFF}
 
 /* global */
 .hide {display:none!important;}
-.wrapper {position:absolute;top:0;left:0;width:1024px; height:748px; overflow: hidden;}
+.wrapper {position:relative;width:1024px; height:748px; margin: 0 auto; overflow: hidden;}
 
 img {-webkit-touch-callout: none; -webkit-user-select: none;}
 .touch-return {-webkit-touch-callout: none; -webkit-user-select: none;}
@@ -34,14 +34,29 @@ a {
 
 
 
-.container .contents > div {text-align: center; padding-top: 100px;}
+.container .contents > div {text-align: center; }
 .dummy-link {width: 250px; height: 55px; text-align: center;  background-color: moccasin; margin: 10px; font-size: 20px; padding-top: 20px;}
 .dummy-page-title {font-family:"NotoSansBold"; width: 100%; height: 30%; text-align: center; font-size: 30px;}
 
 
 
 /* start page */
-.start-con{position:absolute; width:100%; height:100%; background-color: #0c7389;}
+.start-con{position:absolute; width:100%; height:100%; background-color: #ffdf00;}
+
+.start-con .page-title {font-family:"NotoSansBold"; width: 100%; margin-top: 180px; text-align: center; font-size: 50px;}
+
+.start-con .certification {margin-top: 103px;}
+.start-con .certification p {font-size: 15px;}
+.start-con .certification input {
+    display: block;
+    width: 130px;
+    margin: 13px auto 0; padding: 13px 0; text-align: center; letter-spacing: 10px;
+    font-size: 24px;
+    border: none; border-bottom: 1px solid #000; background-color: transparent;
+}
+.start-con .certification a {
+    display: block; width: 130px; margin: 13px auto 0; padding: 13px 0; text-align: center; background: #000; color: #fff;
+}
 
 
 /* main page */

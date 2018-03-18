@@ -11,12 +11,12 @@
     src: url("../fonts/NanumGothicBold.OTF");
 }
 
-body {font-family:"NanumGothic"; background-color: #FFFFFF}
+body {font-family:"NanumGothic"; background-color: #333b58}
 
 
 /* global */
 .hide {display:none!important;}
-.wrapper {position:absolute;top:0;left:0;width:1024px; height:748px; overflow: hidden;}
+.wrapper {overflow: hidden;}
 
 img {-webkit-touch-callout: none; -webkit-user-select: none;}
 .touch-return {-webkit-touch-callout: none; -webkit-user-select: none;}
@@ -25,7 +25,7 @@ a {
     display: block;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     -webkit-tap-highlight-color: transparent; /* For some Androids */
-    width:100%; height:100%;
+    /*width:100%; height:100%;*/
     /*background-color: #000000; opacity: 0.2;*/
 }
 
@@ -56,9 +56,49 @@ a {
 .main-con .contents-area .list.list-2{width:520px; height:137px;}
 .main-con .contents-area .list.list-3{width:520px; height:274px;}
 
-.screen-logo img {width: 100%;}
-.btn-number {font-size: 2rem; border: solid 2px; border-radius: 50px; text-align: center; margin: 20px }
-.alert-number {font-size: 2rem; border: solid 2px; border-radius: 50px; text-align: center; margin: 20px }
+
+#preload {display: none;}
+.wrapper {width: 100%; padding: 6.09375% 0 28.125%;}
+.wrapper .screen-logo img {display: block; width: 100%; height: auto}
+.wrapper .key-area > div {
+    margin-top: 5.46875vw;
+    font-size: 0;
+    text-align: center;
+}
+.wrapper .key-area > div:first-child {
+    margin-top: 0;
+}
+.wrapper .key-area .btn-number {
+    display: inline-block;
+    width: 21.09375vw; height: 21.09375vw;
+    margin-left: 5.46875vw;
+    border: 2px solid #eceded; border-radius: 50%;
+    font-size: 10vw; text-align: center; vertical-align: middle; line-height: 21.09375vw;
+    color: #eceded;
+}
+.wrapper .key-area .btn-number:first-child {
+    margin-left: 0;
+}
+
+.wrapper .key-area .alert-number {
+    display: inline-block;
+    width: 21.09375vw; height: 21.09375vw;
+    border: 2px solid #ffdf00; border-radius: 50%;
+    background-color: #ffdf00;
+    font-size: 10vw; text-align: center; vertical-align: middle; line-height: 21.09375vw;
+    color: #000;
+}
+
+.wrapper .content-btn {margin-top: 7.5vw; padding: 0 13.4375vw; font-size: 0;}
+.wrapper .content-btn > div {display: inline-block; padding-bottom: 1%; font-size: 4.6875vw; color: #dedede; border-bottom: 1px solid #dedede; overflow: hidden}
+.wrapper .content-btn .qna-btn {float: left;}
+.wrapper .content-btn .survey-btn {float: right;}
+
+.wrapper #qna-wrapper { display: block; position: fixed; left: 0; bottom: 0; width: 100%; font-size: 0; background-color: #fff;}
+.wrapper #qna-wrapper textarea {
+    display: inline-block; width: 80%; font-size: 4.6875vw; padding: 7.84%; box-sizing: border-box; vertical-align: bottom; border: none;
+}
+.wrapper #qna-wrapper .qna-btn {display: inline-block; width: 20%; background-color: #ffdf00; font-size: 4.6875vw; padding: 7.84% 0; text-align: center; vertical-align: bottom}
 
 
 
