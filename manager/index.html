@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Voting</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
+    <link rel="stylesheet" href="./css/common.css" />
+    <link rel="stylesheet" href="./css/style.css?v=201703132229" />
+    <!--<link rel="stylesheet" href="./css/swiper.min.css">-->
+
+    <script type="text/javascript" charset="utf-8">
+
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        function onDeviceReady(){
+
+            App.start();
+
+            document.addEventListener("offline", onOffline, false);
+            document.addEventListener("pause", onPause, false);
+            document.addEventListener("resume", onResume, false);
+
+            $("#wrapper").addClass("packing")
+        }
+
+        function onPause(){
+            //pauseAudio();
+        }
+
+        function onResume(){
+            //playAudio();
+        }
+
+        function onOffline(){
+            showAlert('network not found', '네트워크에 연결을 찾을수 없습니다.' , ' Done');
+        }
+
+        function showAlert(message, callback, title, buttonName) {
+
+            if(navigator.notification && navigator.notification.alert){
+
+                navigator.notification.confirm(
+                        message,    // message
+                        callback,   // callback
+                        title,      // title
+                        buttonName  // buttonName
+                );
+
+            }else{
+
+                alert(message);
+                callback();
+            }
+        }
+
+
+        var my_media;
+        function playAudio() {
+            console.log("play sound")
+            // Play the audio file at url
+//                my_media.play({numberOfLoops:100});
+        }
+
+        function pauseAudio(){
+            console.log("stop sound")
+//                my_media.pause();
+        }
+
+    </script>
+</head>
+<body>
+
+<div class="wrapper">
+    <!-- 컨텐츠 컨테이너 영역 -->
+    <div class="container">
+        <!-- 컨텐츠 영역 -->
+        <div class="contents">
+
+            <!-- 시작 페이지 컨테이너 -->
+            <div class="start-con hide">
+                <div class="dummy-page-title">start page</div>
+                <a href="#/main" class="dummy-link">go to main</a>
+            </div>
+
+            <!-- 메인 페이지 컨테이너 -->
+            <div class="main-con hide">
+                <div class="dummy-page-title">main page</div>
+                <a href="#/start" class="dummy-link">go to start(btn logout)</a>
+                <a href="#/session" class="dummy-link">go to session</a>
+            </div>
+
+            <!-- 섹션 페이지 컨테이너 -->
+            <div class="session-con hide">
+                <div class="dummy-page-title">session page</div>
+
+
+                <a href="#/result" class="dummy-link">go to result</a>
+                <a href="#/qna" class="dummy-link">go to QNA</a>
+                <a href="#/main" class="dummy-link">go to main</a>
+
+                <a href="#" class="btn-prev">prev</a>
+                <a href="#" class="btn-next">next</a>
+            </div>
+
+            <!-- 결과 페이지 컨테이너 -->
+            <div class="result-con hide">
+                <div class="dummy-page-title">result page</div>
+
+                <a href="#/session" class="dummy-link">go to session(btn X)</a>
+            </div>
+
+            <!-- 질문 페이지 컨테이너 -->
+            <div class="qna-con hide">
+                <div class="dummy-page-title">QNA page</div>
+
+                <a href="#/session" class="dummy-link">go to session(btn X)</a>
+            </div>
+
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript" src="./js/vendor/jquery.min.js"></script>
+<script type="text/javascript" src="./js/vendor/iscroll.js"></script>
+<script type="text/javascript" src="./js/vendor/underscore-min.js"></script>
+<script type="text/javascript" src="./js/vendor/backbone-min.js"></script>
+<script type="text/javascript" src="./js/vendor/swiper.min.js"></script>
+<script type="text/javascript" src="./js/interactive/App.js"></script>
+<script type="text/javascript" src="./js/interactive/views/common/ResizeView.js"></script>
+<script type="text/javascript" src="./js/interactive/views/common/UtilView.js"></script>
+
+<script type="text/javascript" src="./js/interactive/views/StartView.js"></script>
+<script type="text/javascript" src="./js/interactive/views/MainView.js"></script>
+<script type="text/javascript" src="./js/interactive/views/SessionView.js"></script>
+<script type="text/javascript" src="./js/interactive/views/ResultView.js"></script>
+<script type="text/javascript" src="./js/interactive/views/QnaView.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+        App.start({});
+    });
+</script>
+
+</body>
+</html>
