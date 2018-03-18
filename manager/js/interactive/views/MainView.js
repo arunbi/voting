@@ -32,6 +32,9 @@ App.Views.MainView = Backbone.View.extend({
 		// App.trigger(App.Events.SHOW_BTN_REFERENCE);
 		App.trigger(App.Events.SHOW_BTN_HOME);
 
+		this.checkSession();
+		this.setEle();
+
 		this.$el.removeClass("hide");
 		this.$el.on("webkitAnimationEnd", _.bind(this.showComplete, this));
 
@@ -72,6 +75,7 @@ App.Views.MainView = Backbone.View.extend({
 	// 이벤트 생성
 	addEvent : function(){
 		// this.$el.find(".btn-brochure").on(App.GlobalVars.CLICK, this.onClick_brochure)
+        this.$el.find('.btn-session').on(App.GlobalVars.CLICK, _.bind(this.onClick_session, this))
 	},
 
 	// 이벤트 제거
@@ -84,8 +88,56 @@ App.Views.MainView = Backbone.View.extend({
 		var _this = App.view;
 		var w = App.GlobalVars.window_width;
 		var h = App.GlobalVars.window_height;
+	},
+
+	checkSession : function(){
+		var len = this.$el.find('.btn-session').length;
+		var open_session = parseInt(App.GlobalVars.json_setting_data.vsessnum)-1;
+		for(var i = 0; i<len; i++){
+			if(i>open_session){
+                this.$el.find('.btn-session').eq(i).parent().addClass('inactive');
+                //inactive
+			}
+		}
+	},
+
+    setEle : function(){
+		var vtitle = App.GlobalVars.json_setting_data.vtitle;
+		var vday = App.GlobalVars.json_setting_data.vday;
+		var vloc = App.GlobalVars.json_setting_data.vloc;
+
+		this.$el.find('.vtitle').text(vtitle);
+		this.$el.find('.vday').text(vday);
+		this.$el.find('.vloc').text(vloc);
+	},
+
+	onClick_session : function(e){
+		var index = $(e.currentTarget).parent().index();
+		App.GlobalVars.current_session_index = index;
+		this.setSessionNum(index);
+		return false;
+
+	},
+
+	setSessionNum : function(index){
+        var url = App.GlobalVars.SET_ADMIN_SESSION_START_URL;
+        if(App.GlobalVars.isDebugMode) url = App.GlobalVars.DEBUG_SET_ADMIN_SESSION_START_URL;
+
+        var lstno = App.GlobalVars.json_setting_data.lstno;
+		var data = {
+			"lstno":lstno,
+			"sessno":index+1
+		}
+
+        App.getJsonData(url, data, _.bind(this.onComplete_setSessionNum, this));
+	},
+
+    onComplete_setSessionNum : function(){
+		this.goSession();
+	},
+
+	goSession : function(){
+        location.href = this.$el.find(".btn-session").attr("href");
 	}
-
-
 });
 

@@ -2,13 +2,13 @@
   "status": 200,
   "qnum": "3",
   "result": [{
-    "exam": "10",
-    "percent": "0.0"
+    "exam": "1",
+    "percent": "40.2"
   }, {
-    "exam": "20",
-    "percent": "100.0"
+    "exam": "2",
+    "percent": "80.9"
   }, {
-    "exam": "30",
-    "percent": "0.0"
+    "exam": "3",
+    "percent": "60"
   }]
 }

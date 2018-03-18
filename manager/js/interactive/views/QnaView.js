@@ -64,6 +64,24 @@ App.Views.QnaView = Backbone.View.extend({
 		var _this = App.view;
 		var w = App.GlobalVars.window_width;
 		var h = App.GlobalVars.window_height;
+	},
+
+	getQnaData : function(){
+        var url = App.GlobalVars.GET_ADMIN_QNA_URL;
+        if(App.GlobalVars.isDebugMode) url = App.GlobalVars.DEBUG_GET_ADMIN_QNA_URL;
+
+        var lstno = App.GlobalVars.json_setting_data.lstno;
+        var sessno = App.GlobalVars.json_setting_data.qlist[App.GlobalVars.current_q_index].qno;
+        var data = {
+            "lstno":lstno,
+            "sessno":current_session_index
+        }
+
+        App.getJsonData(url, data, this.onComplete_getQnaData)
+	},
+
+	onComplete_getQnaData : function(json){
+
 	}
 
 

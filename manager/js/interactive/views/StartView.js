@@ -11,7 +11,6 @@ App.Views.StartView = Backbone.View.extend({
 
 	// 보여주기
 	show : function(prevPage){
-
 		this.$el.removeClass("hide");
 		this.$el.on("webkitAnimationEnd", _.bind(this.showComplete, this));
 
@@ -20,7 +19,6 @@ App.Views.StartView = Backbone.View.extend({
 		} else {
 			this.$el.addClass("alphaIn_animate");
 		}
-
 	},
 
 	// 보여주기 완료
@@ -52,6 +50,7 @@ App.Views.StartView = Backbone.View.extend({
 	// 이벤트 생성
 	addEvent : function(){
 		// this.$el.find(".btn-brochure").on(App.GlobalVars.CLICK, this.onClick_brochure)
+		this.$el.find(".go-next").on(App.GlobalVars.CLICK, _.bind(this.onClick_next, this));
 	},
 
 	// 이벤트 제거
@@ -64,8 +63,40 @@ App.Views.StartView = Backbone.View.extend({
 		var _this = App.view;
 		var w = App.GlobalVars.window_width;
 		var h = App.GlobalVars.window_height;
+	},
+
+    onClick_next : function(e){
+		var vkey = this.$el.find('input').val();
+		this.checkInput(vkey);
+		return false;
+	},
+
+	checkInput : function(vkey){
+		if(vkey == ""){
+			console.log('진행키를 입력해 주세요.')
+		}else if(vkey.length != 4){
+            console.log('진행키를 입력해 주세요.')
+		}else{
+            this.getSettingData(vkey)
+		}
+	},
+
+
+	getSettingData : function(vkey){
+        var url = App.GlobalVars.GET_ADMIN_SETTING_DATA_URL;
+		if(App.GlobalVars.isDebugMode) url = App.GlobalVars.DEBUG_GET_ADMIN_SETTING_DATA_URL;
+
+		var data = {"vkey":vkey}
+		App.getJsonData(url, data, _.bind(this.onComplete_getSettingData, this))
+	},
+
+	onComplete_getSettingData : function(json){
+        App.GlobalVars.json_setting_data = json;
+       this.goMain();
+	},
+
+	goMain : function(){
+        location.href = this.$el.find(".go-next").attr("href");
 	}
-
-
 });
 

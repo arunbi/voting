@@ -126,16 +126,16 @@ var App = new (Backbone.Router.extend({
 
 
         // debug
-		DEBUG_GET_ADMIN_SETTING_DATA_URL : "json/get_admin_setting.asp", //?vkey=WD07
+		DEBUG_GET_ADMIN_SETTING_DATA_URL : "json/get_admin_setting.json", //?vkey=WD07
 
-		DEBUG_SET_ADMIN_SESSION_START_URL : "json/get_complete.asp", //?lstno=8&sessno=1
-		DEBUG_SET_ADMIN_SESSION_END_URL : "json/get_complete.asp", //?lstno=8&sessno=1
+		DEBUG_SET_ADMIN_SESSION_START_URL : "json/get_complete.json", //?lstno=8&sessno=1
+		DEBUG_SET_ADMIN_SESSION_END_URL : "json/get_complete.json", //?lstno=8&sessno=1
 
-		DEBUG_SET_ADMIN_VOTION_START_URL : "json/get_complete.asp", //?lstno=8&qno=1&qnum=3&qopt=A
-		DEBUG_SET_ADMIN_VOTION_END_URL : "json/set_admin_voting_end.asp", //?lstno=8&qno=1&qnum=3&qopt=A
-		DEBUG_SET_ADMIN_VOTION_STOP_URL : "json/get_complete.asp", //?lstno=8&qno=1&qnum=3&qopt=A
+		DEBUG_SET_ADMIN_VOTION_START_URL : "json/get_complete.json", //?lstno=8&qno=1&qnum=3&qopt=A
+		DEBUG_SET_ADMIN_VOTION_END_URL : "json/set_admin_voting_end.json", //?lstno=8&qno=1&qnum=3&qopt=A
+		DEBUG_SET_ADMIN_VOTION_STOP_URL : "json/get_complete.json", //?lstno=8&qno=1&qnum=3&qopt=A
 
-		DEBUG_GET_ADMIN_QNA_URL : "json/get_admin_qna.asp", //?lstno=8&sessno=1
+		DEBUG_GET_ADMIN_QNA_URL : "json/get_admin_qna.json", //?lstno=8&sessno=1
 
 
 		/* router menu */
@@ -153,6 +153,11 @@ var App = new (Backbone.Router.extend({
 
 		brochure_index : -1,
 		keymsg_index : -1,
+
+		json_setting_data : {},
+		current_q_index : 0,
+		current_session_index : 0,
+		isShow_loading : false,
 
 		CLICK: "click"
 
@@ -191,9 +196,6 @@ var App = new (Backbone.Router.extend({
 		App.GlobalVars.LSTNO = json.lstno;
 		App.GlobalVars.VTIME = json.vtime;
 		App.GlobalVars.sessno = 0;
-
-
-
 
 	},
 
