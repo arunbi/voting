@@ -191,8 +191,46 @@ a {
     background: url('../assets/left-arrow_w.png') 0 0 no-repeat;
     background-size: contain;
 }
+
 .qna-con .qna-area {
-    height: 648px; overflow-y: scroll;
+    position: relative;
+    height: 648px;
+    overflow-y: scroll; background-color: #f8f8f8;
+}
+.qna-con .qna-area ol {
+    padding-bottom: 40px;
+}
+.qna-con .qna-area .btn-area {
+    position: absolute; top: 28px; right: 30px;
+}
+.qna-con .qna-area .btn-area a {
+    display: inline-block; padding: 12px 20px;
+    font: 16px/1 "NotoSans"; border: 1px solid #ddd; background: #fff;
+}
+.qna-con .qna-area .qna-session {
+    margin-top: 30px; padding: 0 30px; text-align: left;
+}
+.qna-con .qna-area .qna-session b {
+    display: block;
+    padding-bottom: 12px;
+    font-size: 20px; text-align: left; font-family:"NotoSans";
+}
+.qna-con .qna-area .qna-session li {
+    position: relative;
+    margin-top: 10px; /*padding: 34px 90px;*/
+    background-color: #fff; border: 1px solid #ddd; text-align: left;
+}
+
+.qna-con .qna-area .qna-session li:after {
+    display: block; content: '';
+    position: absolute; top:29px; left: 36px;
+    width: 38px; height: 38px;
+    background: url("../assets/ico_q.png") 0 0 no-repeat; background-size: contain;
+    font-family:"NotoSans";
+}
+.qna-con .qna-area .qna-session li a {
+    display: block;
+    padding: 34px 90px;
 }
 
 

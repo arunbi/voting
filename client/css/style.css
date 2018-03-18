@@ -58,7 +58,7 @@ a {
 
 
 #preload {display: none;}
-.wrapper {width: 100%; padding: 6.09375% 0 28.125%;}
+.wrapper {width: 100%; padding: 6.09375% 0 0;}
 .wrapper .screen-logo img {display: block; width: 100%; height: auto}
 .wrapper .key-area > div {
     margin-top: 5.46875vw;
@@ -96,9 +96,9 @@ a {
 
 .wrapper #qna-wrapper { display: block; position: fixed; left: 0; bottom: 0; width: 100%; font-size: 0; background-color: #fff;}
 .wrapper #qna-wrapper textarea {
-    display: inline-block; width: 80%; font-size: 4.6875vw; padding: 7.84%; box-sizing: border-box; vertical-align: bottom; border: none;
+    display: inline-block; width: 80%; font-size: 4.6875vw; padding: 5% 7.84%; box-sizing: border-box; vertical-align: bottom; border: none;
 }
-.wrapper #qna-wrapper .qna-btn {display: inline-block; width: 20%; background-color: #ffdf00; font-size: 4.6875vw; padding: 7.84% 0; text-align: center; vertical-align: bottom}
+.wrapper #qna-wrapper .qna-btn {display: inline-block; width: 20%; background-color: #ffdf00; font-size: 4.6875vw; padding: 5% 0; text-align: center; vertical-align: bottom}
 
 
 
