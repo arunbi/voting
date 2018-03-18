@@ -150,12 +150,6 @@ a {
 .session-con .timer-con .timer .timer-guage {display: block; height: 100%; background-color: #ff1744;}
 .session-con .timer-con .btn-stop {position: absolute; right: 0; bottom: 0; display: block; width: 100px; font-size: 16px; border-left: 1px solid #f1f1f1; line-height: 54px; text-align: center;}
 
-/* loading */
-.loading-con {position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #fff;}
-.loading-con .title {margin-top: 290px; font-size: 40px; text-align: center;}
-.loading-con .loading-box {width: 310px; height: 5px; margin: 70px auto 0; background-color: #f7f7f7; border-radius: 15px;}
-.loading-con .loading-box .load-guage {display: block; height: 5px; background-color: #ff1744; border-radius: 15px;}
-
 /* result */
 .result-con {position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #fff;}
 
@@ -169,6 +163,12 @@ a {
 .result-con .result-graph li .percent {position: absolute; bottom: 105%; left: -20px; width: 60px; text-align: center; font-size: 20px; overflow: hidden;}
 .result-con .result-graph .session-num {display: inline-block; position: relative; padding-top: 360px; line-height: 3;}
 
+/* loading */
+.loading-con {position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #fff;}
+.loading-con .title {margin-top: 290px; font-size: 40px; text-align: center;}
+.loading-con .loading-box {width: 310px; height: 5px; margin: 70px auto 0; background-color: #f7f7f7; border-radius: 15px;}
+.loading-con .loading-box .load-guage {display: block; height: 5px; background-color: #ff1744; border-radius: 15px;}
+
 
 .result-con .btn-close-result {
     display: block;
@@ -178,6 +178,22 @@ a {
     overflow: hidden; text-indent: -10000px;
 }
 
+/* qna */
+.qna-con .top-area {
+    position: relative;
+    width: 100%; height: 100px;
+    padding: 25px 30px; box-sizing: border-box;
+    background-color: #333b58;
+}
+.qna-con .top-area img {display: block; width: auto; height: 100%;}
+.qna-con .top-area .btn-back {
+    position: absolute; top: 32px; right: 30px; width: 36px; height: 36px; overflow: hidden; text-indent: -1000px;
+    background: url('../assets/left-arrow_w.png') 0 0 no-repeat;
+    background-size: contain;
+}
+.qna-con .qna-area {
+    height: 648px; overflow-y: scroll;
+}
 
 
 
