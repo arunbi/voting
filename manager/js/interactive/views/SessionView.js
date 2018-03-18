@@ -122,7 +122,7 @@ App.Views.SessionView = Backbone.View.extend({
 
     setEle : function(){
     	App.GlobalVars.isShow_loading = false;
-        //this.currentQuestionIndex = 0;
+        if(App.GlobalVars.isReset_session) this.currentQuestionIndex = 0;
         this.totalQuestion = App.GlobalVars.json_setting_data.qlist.length;
         this.maxTime = App.GlobalVars.json_setting_data.vtime;
 

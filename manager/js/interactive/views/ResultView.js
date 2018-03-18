@@ -159,6 +159,7 @@ App.Views.ResultView = Backbone.View.extend({
 	},
 
 	goSession : function(){
+		App.GlobalVars.isReset_session = false;
         location.href = this.$el.find(".btn-close-result").attr("href");
 	}
 

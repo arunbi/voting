@@ -158,6 +158,7 @@ var App = new (Backbone.Router.extend({
 		current_q_index : 0,
 		current_session_index : 0,
 		isShow_loading : false,
+		isReset_session : false,
 
 		CLICK: "click"
 

@@ -137,6 +137,7 @@ App.Views.MainView = Backbone.View.extend({
 	},
 
 	goSession : function(){
+        App.GlobalVars.isReset_session = true;
         location.href = this.$el.find(".btn-session").attr("href");
 	}
 });
