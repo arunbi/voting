@@ -233,6 +233,27 @@ a {
     padding: 34px 90px;
 }
 
+.qna-con .qna-pop {position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #fff;}
+.qna-con .qna-pop b {
+    display: block;
+    text-align: center;
+    margin-top: 55px;
+    font: 30px/1 "NotoSans";
+}
+.qna-con .qna-pop p {
+    margin-top: 90px;
+    padding: 0 50px;
+    text-align: left;
+    font: 24px/1.5 "NotoSans";
+}
+.qna-con .qna-pop .btn-close-qnapop {
+    display: block;
+    position: absolute; top: 50px; right: 35px;
+    width: 54px; height: 54px;
+    background: url("../assets/btn_close.png") 50% 50% no-repeat; background-size: 66%;
+    overflow: hidden; text-indent: -10000px;
+}
+
 
 
 
