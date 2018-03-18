@@ -60,8 +60,32 @@ a {
 
 
 /* main page */
-.main-con{position:absolute; width:100%; height:100%;  background-color: #2e3192}
+.main-con{position:absolute; width:100%; height:100%;  background-color: #f8f8f8;}
 
+.main-con .top-area {
+    position: relative;
+    width: 100%; height: 100px;
+    padding: 25px 30px; box-sizing: border-box;
+    background-color: #333b58;
+}
+.main-con .top-area img {display: block; width: auto; height: 100%;}
+.main-con .top-area .btn-logout {
+    position: absolute; top: 25px; right: 30px; width: 50px; height: 50px; overflow: hidden; text-indent: -1000px;
+    background: url('../assets/btn_power.png') 0 0 no-repeat;
+    background-size: contain;
+}
+
+.main-con .info-area {margin-top: 100px;}
+.main-con .info-area dl dd {margin-top: 40px;}
+.main-con .info-area dl dd span {
+    display: block; text-align: center;
+}
+.main-con .info-area .vtitle {font-size: 50px;}
+.main-con .info-area .vday {font-size: 20px;}
+.main-con .info-area .vloc {font-size: 20px;}
+.main-con .info-area ol li {
+    border: 1px solid #dddddd;
+}
 
 /* session */
 .session-con{position:absolute; width:100%; height:100%; background-color: #ff3399}
