@@ -1,17 +1,17 @@
 @charset "utf-8";
 @font-face
 {
-    font-family:NanumGothic;
-    src: url("../fonts/NanumGothic.OTF");
+    font-family:NotoSans;
+    src: url("../fonts/NotoSansCJKkr-Medium.OTF");
 }
 
 @font-face
 {
-    font-family:NanumGothicBold;
-    src: url("../fonts/NanumGothicBold.OTF");
+    font-family:NotoSansBold;
+    src: url("../fonts/NotoSansCJKkr-Bold.OTF");
 }
 
-body {font-family:"NanumGothic"; background-color: #333b58}
+body {font-family:"NotoSans"; background-color: #333b58}
 
 
 /* global */
@@ -58,7 +58,7 @@ a {
 
 
 #preload {display: none;}
-.wrapper {width: 100%; padding: 6.09375% 0 0;}
+.wrapper {width: 100%; padding: 6.09375% 0 0; min-height: 170vw;}
 .wrapper .screen-logo img {display: block; width: 100%; height: auto}
 .wrapper .key-area > div {
     margin-top: 5.46875vw;
@@ -89,16 +89,81 @@ a {
     color: #000;
 }
 
-.wrapper .content-btn {margin-top: 7.5vw; padding: 0 13.4375vw; font-size: 0;}
-.wrapper .content-btn > div {display: inline-block; padding-bottom: 1%; font-size: 4.6875vw; color: #dedede; border-bottom: 1px solid #dedede; overflow: hidden}
-.wrapper .content-btn .qna-btn {float: left;}
-.wrapper .content-btn .survey-btn {float: right;}
+.wrapper .content-btn {margin-top: 7.5vw; padding: 0 13.4375vw; font-size: 0; text-align: center;}
+.wrapper .content-btn > a {display: inline-block; padding-bottom: 1%; font-size: 4.6875vw; color: #dedede; border-bottom: 1px solid #dedede; overflow: hidden}
+.wrapper .content-btn .survey-btn {float: left;}
+.wrapper .content-btn .agenda-btn {float: right;}
 
-.wrapper #qna-wrapper { display: block; position: fixed; left: 0; bottom: 0; width: 100%; font-size: 0; background-color: #fff;}
+.wrapper .dimmed {
+    display: none;
+    position: fixed; top: 0; left: 0; z-index: 5; pointer-events: none;
+    width: 100%; height: 100%;
+    background: #000;
+    opacity: 0.5;
+}
+
+.wrapper .qna-popup {
+    position: fixed; top: 50%; left: 5%; z-index: 10;
+    width: 90%; height: 90vw;
+    margin-top: -45vw;
+    border-radius: 5%;
+}
+.wrapper .qna-popup .btn-close {
+    display: block;
+    position: absolute; top: -8vw; right: 0;
+    width: 5.6vw; height: 5.6vw;
+    background: url("../assets/btn_close.png") 0 0 no-repeat; background-size: contain;
+}
+.wrapper .qna-popup textarea {
+    display: block;
+    width: 100%; height: 75vw;
+    padding: 5%; box-sizing: border-box;
+    border: none;
+    border-radius: 2% 2% 0 0;
+    font-size: 4.375vw;
+}
+.wrapper .qna-popup .btn-register {
+    display: block;
+    width: 100%; text-align: center;
+    font-size: 4.375vw; line-height: 15vw;
+    border-radius: 0 0 2vw 2vw;
+    background: #ffdf00;
+}
+
+.wrapper .complete-popup {
+    position: fixed; top: 50%; left: 5%; z-index: 10;
+    width: 90%; height: 42vw;
+    margin-top: -21vw;
+    border-radius: 5%;
+}
+
+.wrapper .complete-popup .message {
+    display: block;
+    width: 100%; height: 27vw;
+    box-sizing: border-box;
+    border: none; border-radius: 2% 2% 0 0;
+    font-size: 4.375vw; line-height: 27vw; text-align: center;
+    background: #fff;
+}
+
+.wrapper .complete-popup .btn-confirm {
+    display: block;
+    width: 100%; text-align: center;
+    font-size: 4.375vw; line-height: 15vw;
+    border-radius: 0 0 2vw 2vw;
+    background: #ffdf00;
+}
+
+.show-popup {overflow: hidden;}
+.show-popup .wrapper { min-height: auto;}
+.show-popup .wrapper .dimmed {display: block;}
+
+
+/*.wrapper #qna-wrapper { display: block; position: fixed; left: 0; bottom: 0; width: 100%; font-size: 0; background-color: #fff;}
 .wrapper #qna-wrapper textarea {
     display: inline-block; width: 80%; font-size: 4.6875vw; padding: 5% 7.84%; box-sizing: border-box; vertical-align: bottom; border: none;
 }
-.wrapper #qna-wrapper .qna-btn {display: inline-block; width: 20%; background-color: #ffdf00; font-size: 4.6875vw; padding: 5% 0; text-align: center; vertical-align: bottom}
+.wrapper #qna-wrapper .qna-btn {display: inline-block; width: 20%; background-color: #ffdf00; font-size: 4.6875vw; padding: 5% 0; text-align: center; vertical-align: bottom}*/
 
 
 

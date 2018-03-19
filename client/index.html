@@ -74,7 +74,7 @@
 
         </script>
     </head>
-    <body>
+    <body > <!-- @hi: class="show-popup" 을 팝업 노출시 body에 붙여주고 해당 팝업에 붙어있는 hide 제거-->
         <div id="preload" class="hidden">
             <p class="percent">0</p>
             <div class="preload-guide"></div>
@@ -114,19 +114,26 @@
                         </div>
                     </div>
                     <div class="content-btn">
-                        <div class="qna-btn"><p>설문하기</p></div>
-                        <!--<a href="http://mmk.co.kr" class="survey-btn" target="_blank"><p>SURVEY</p></a>-->
-                        <div class="survey-btn"><p>아 젠 다</p></div>
+                        <a href="#" class="survey-btn"><p>설문하기</p></a>
+                        <a href="#" class="qna-btn"><p>질문하기</p></a>
+                        <a href="#" class="agenda-btn"><p>아 젠 다</p></a>
                     </div>
                 </div>
             </div>
 
+            <div class="dimmed"></div>
 
-            <div id="qna-wrapper" class="hidden">
+            <div class="qna-popup hide">
+                <a href="#" class="btn-close"></a>
                 <div class="qna-content">
-                    <textarea rows="1" cols="30" name="contents" placeholder="질문을 써주세요."></textarea>
-                    <a href="#" class="qna-btn">전송</a>
+                    <textarea cols="30" name="contents" placeholder="질문을 입력해 주세요."></textarea>
+                    <a href="#" class="btn-register">등록</a>
                 </div>
+            </div>
+
+            <div class="complete-popup hide">
+                <p class="message">질문이 등록되었습니다.</p>
+                <a href="#" class="btn-confirm">확인</a>
             </div>
 
            <!-- <div id="no-btn" class="hidden">
