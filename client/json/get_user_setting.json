@@ -3,11 +3,11 @@
   "logo": "assets/logo_login.png",
   "voting_url":"http://d.wemix.co.kr/voting/api/set-voting-value.asp",
   "qna_url":"http://d.wemix.co.kr/voting/api/set-qna-value.asp",
-  "survey_url":"",
-  "agenda_url":"",
-  "bgcolor":"#ffdf00",
-  "txtcolor":"#ff3399",
+  "survey_url":"http://naver.com",
+  "agenda_url":"http://naver.com",
+  "bgcolor":"#343b58",
+  "txtcolor":"#ffffff",
   "linecolor":"#ffffff",
-  "btnbgcolor":"#333b58",
-  "btntxtcolor":"#ffdf00"
+  "btnbgcolor":"#fff000",
+  "btntxtcolor":"#000000"
 }

@@ -43,8 +43,29 @@ var App = new (Backbone.Router.extend({
 		this.makeCollection();		// 콜렉션 생성하기
 		this.makeView();			// 뷰 생성하기
 
-		this.onChangeRoute(this.GlobalVars.ROUTER_MAIN,0);
-		Backbone.history.start();
+		// this.onChangeRoute(this.GlobalVars.ROUTER_MAIN,0);
+		// Backbone.history.start();
+
+        if(window.location.href.indexOf('?') != -1){
+            var hash, vars = [];
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+
+            for(var i = 0; i < hashes.length; i++)
+            {
+                hash = hashes[i].split('=');
+                // vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+
+            console.log(vars)
+
+            // localStorage.setItem("lstno", hash[1]);
+            // localStorage.setItem("uno", hash[1]);
+        }
+
+
+        // var prev = prevPage.replace("#/", "")
+
 
 
 		this.getData();
@@ -57,7 +78,7 @@ var App = new (Backbone.Router.extend({
 	makeView : function(){
 		this.resizeView = new App.Views.ResizeView();
 		this.utilView = new App.Views.UtilView();
-		this.mainView = new App.Views.MainView({"el":$(".main-con")});
+		this.mainView = new App.Views.MainView({"el":$("#main-wrapper")});
 	},
 
 
@@ -103,7 +124,7 @@ var App = new (Backbone.Router.extend({
 		SURVEY_URL : "http://d.wemix.co.kr/voting/client/survey.asp", //?lstno=8&uno=1004
 		AGENDA_URL : "http://d.wemix.co.kr/voting/client/agenda.asp", //?lstno=8&uno=1004
 
-		// DEBUG_GET_USER_SETTING_DATA_URL : "json/get_user_setting.json", //?lstno=8
+		DEBUG_GET_USER_SETTING_DATA_URL : "json/get_user_setting.json", //?lstno=8
 		DEBUG_SET_VOTING_VALUE_URL :"json/get_complete.json",//?lstno=8&uno=1004&value=2
 		DEBUG_QNA_URL : "json/get_complete.json", //?lstno=8&uno=1004&value=내용
 		DEBUG_SURVEY_URL : "json/get_complete.json", //?lstno=8&uno=1004
@@ -157,30 +178,31 @@ var App = new (Backbone.Router.extend({
 		App.GlobalVars.SET_VOTING_VALUE_URL = json.voting_url;
 		App.GlobalVars.QNA_URL = json.qna_url;
 		App.GlobalVars.SURVEY_URL = json.survey_url;
+		$(".survey-btn").attr("href", App.GlobalVars.SURVEY_URL);
+
 		App.GlobalVars.AGENDA_URL = json.agenda_url;
+        $(".agenda-btn").attr("href", App.GlobalVars.AGENDA_URL);
 
 		$(".logo-img").attr("src", json.logo);
 		$("body").css("background-color", json.bgcolor);
 		$(".btn-number").css("color", json.txtcolor);
+
+		$(".survey-btn").css("color", json.txtcolor);
+		$(".survey-btn").css("border-bottom", "1px solid "+json.txtcolor);
+		$(".qna-btn").css("color", json.txtcolor);
+        $(".qna-btn").css("border-bottom", "1px solid "+json.txtcolor);
+		$(".agenda-btn").css("color", json.txtcolor);
+        $(".agenda-btn").css("border-bottom", "1px solid "+json.txtcolor);
+
 		$(".btn-number").css("border-color", json.linecolor);
 		$(".alert-number").css("background-color", json.btnbgcolor);
 		$(".alert-number").css("color", json.btntxtcolor);
 
-		/*$(".logo").attr("href", json.logo);
-		$(".logo").attr("href", json.logo);
-		$(".logo").attr("href", json.logo);
-		$(".logo").attr("href", json.logo);*/
+		$(".content-wrapper").removeClass("hide");
 
-
-/*
-		“logo”: "http://d.wemix.co.kr/voting/uploads/logo.png",
-
-			"bgcolor" : "#ffdf00",
-			"txtcolor" : "#000000",
-			"linecolor" : "#000000",
-			"btnbgcolor" : "#333b58",
-			"btntxtcolor" : "#ffdf00“
-*/
+        // this.onChangeRoute(this.GlobalVars.ROUTER_MAIN,0);
+        App.onChangeRoute(App.GlobalVars.ROUTER_MAIN,0);
+        Backbone.history.start();
 
 	},
 

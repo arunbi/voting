@@ -1,7 +1,7 @@
 App.Views.MainView = Backbone.View.extend({
 	initialize : function(obj){
 		this.addEvent();
-		this.container = $(".main-con");
+		this.container = $("#main-wrapper");
 	},
 
 	// 페이지 렌더링
@@ -11,46 +11,20 @@ App.Views.MainView = Backbone.View.extend({
 
 	// 보여주기
 	show : function(prevPage){
+        this.$el.removeClass("hide");
+        this.$el.on("webkitAnimationEnd", _.bind(this.showComplete, this));
 
-		if(window.location.href.indexOf('?') != -1){
-			var hash, vars = [];
-			var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-
-			for(var i = 0; i < hashes.length; i++)
-			{
-				hash = hashes[i].split('=');
-				vars.push(hash[0]);
-				vars[hash[0]] = hash[1];
-			}
-
-			localStorage.setItem("dno", hash[1]);
-		}
-
-
-		var prev = prevPage.replace("#/", "")
-
-		// App.trigger(App.Events.SHOW_BTN_REFERENCE);
-		App.trigger(App.Events.SHOW_BTN_HOME);
-
-		this.$el.removeClass("hide");
-		this.$el.on("webkitAnimationEnd", _.bind(this.showComplete, this));
-
-		if(prev == App.GlobalVars.ROUTER_LIST){
-			this.$el.addClass("slideIn_animate_ver");
-		} else if(prev == App.GlobalVars.ROUTER_REFERENCE){
-			this.$el.addClass("slideIn_animate_ver_rever");
-		} else {
-			this.$el.addClass("slideIn_animate_rever");
-		}
-
+        if(prevPage == App.GlobalVars.ROUTER_MAIN){
+            this.$el.addClass("alphaIn_animate");
+        } else {
+            this.$el.addClass("alphaIn_animate");
+        }
 	},
 
 	// 보여주기 완료
 	showComplete : function(){
 		this.$el.off("webkitAnimationEnd");
-		this.$el.removeClass("slideIn_animate_ver");
-		this.$el.removeClass("slideIn_animate_ver_rever");
-		this.$el.removeClass("slideIn_animate_rever");
+		this.$el.removeClass("alphaIn_animate");
 	},
 
 	// 감추기
@@ -89,7 +63,8 @@ App.Views.MainView = Backbone.View.extend({
 
 	// 이벤트 생성
 	addEvent : function(){
-		// this.$el.find(".btn-brochure").on(App.GlobalVars.CLICK, this.onClick_brochure)
+		this.$el.find(".btn-number").on(App.GlobalVars.CLICK, this.onClick_number);
+		console.log(this.$el.find(".btn-number"))
 	},
 
 	// 이벤트 제거
@@ -102,7 +77,37 @@ App.Views.MainView = Backbone.View.extend({
 		var _this = App.view;
 		var w = App.GlobalVars.window_width;
 		var h = App.GlobalVars.window_height;
+	},
+
+    onClick_number: function(e){
+		var num = $(e.currentTarget).attr("index")
+		App.mainView.setSendNumber(num)
+
+	},
+
+	setSendNumber: function(index){
+		$(".alert-number p").html(index);
+
+		setTimeout(this.sendValue, 1000)
+		// this.sendValue();
+	},
+
+	sendValue: function(){
+
+        var url = App.GlobalVars.SET_VOTING_VALUE_URL;
+        if(App.GlobalVars.isDebugMode) url = App.GlobalVars.DEBUG_SET_VOTING_VALUE_URL;
+
+		App.getJsonData(url, {}, App.mainView.sendValueComplete)
+
+	},
+
+    sendValueComplete: function(){
+		console.log("complete")
+        $(".alert-number p").html("");
+
 	}
+
+
 
 
 });
