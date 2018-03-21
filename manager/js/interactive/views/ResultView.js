@@ -3,7 +3,7 @@ App.Views.ResultView = Backbone.View.extend({
 		this.addEvent();
 		this.container = $(".result-con");
 
-        this.maxTime = 5;
+        this.maxTime = 3;
         this.timerNum = 0;
 
         this.timer = "";
@@ -55,6 +55,7 @@ App.Views.ResultView = Backbone.View.extend({
 		this.$el.addClass("hide");
 		this.$el.off("webkitAnimationEnd");
 		this.$el.removeClass("alphOut_animate");
+        this.timerNum = 0;
 	},
 
 	// 이벤트 생성

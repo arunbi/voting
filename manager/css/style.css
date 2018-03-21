@@ -121,6 +121,7 @@ a {
     margin-top: -54px;
     background: url("../assets/left-arrow.png") 50% 50% no-repeat; background-size: contain;
     overflow: hidden; text-indent: -10000px;
+    z-index: 10;
 }
 .session-con .swipe-wrap .btn-next {
     display: block;
@@ -129,6 +130,7 @@ a {
     margin-top: -54px;
     background: url("../assets/right-arrow.png") 50% 50% no-repeat; background-size: contain;
     overflow: hidden; text-indent: -10000px;
+    z-index: 10;
 }
 
 .session-con .btns-area {
@@ -140,11 +142,13 @@ a {
     box-shadow: 0 -3px 20px rgba(184, 184, 184, 0.5);
     -webkit-box-shadow: 0 -3px 20px rgba(184, 184, 184, 0.5);
     -moz-box-shadow: 0 -3px 20px rgba(184, 184, 184, 0.5);
+    background-color: #eeeeee;
+
 }
 .session-con .btns-area a {display: inline-block; width: 100px; font-size: 16px; border-right: 1px solid #f1f1f1; line-height: 54px; text-align: center;}
 .session-con .btns-area .current {position: absolute; right: 0; bottom: 0; display: block; width: 100px; font-size: 16px; border-left: 1px solid #f1f1f1; line-height: 54px; text-align: center;}
 
-.session-con .timer-con {position: absolute; bottom: 0; left: 0; width: 100%; height: 54px; background-color: #fff; border-top: 1px solid #f1f1f1;}
+.session-con .timer-con {position: absolute; bottom: 0; left: 0; width: 100%; height: 54px; background-color: #fff; border-top: 1px solid #f1f1f1;  background-color: #eeeeee}
 .session-con .timer-con.active {display: block;}
 .session-con .timer-con .timer {width: 924px; height: 100%;}
 .session-con .timer-con .timer .timer-guage {display: block; height: 100%; background-color: #ff1744;}
@@ -260,10 +264,12 @@ a {
 /* swiper */
 
 .swiper-container {
-    width: 100%;
-    height: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    display:inline-block;
+    vertical-align:middle;
+    width: 100vw;
+
+    max-width: 1024px;
+    max-height: 748px;
 }
 .swiper-slide {
     text-align: center;

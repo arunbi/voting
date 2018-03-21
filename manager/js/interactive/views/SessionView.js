@@ -8,6 +8,7 @@ App.Views.SessionView = Backbone.View.extend({
 		this.timerNum = 0;
 
 		this.timer = "";
+        this.swiper;
 
 	},
 
@@ -41,10 +42,10 @@ App.Views.SessionView = Backbone.View.extend({
 
 	// 감추기
 	hide : function(route){
-
 		this.$el.on("webkitAnimationEnd", _.bind(this.hideComplete, this));
 
 		if(route == App.GlobalVars.ROUTER_MAIN){
+            this.swiper.slideTo(0);
 			this.$el.addClass("alphOut_animate");
 		} else {
 			this.$el.addClass("alphOut_animate");
@@ -85,11 +86,13 @@ App.Views.SessionView = Backbone.View.extend({
 	},
 
 	onClick_prev : function(e){
-		this.prev();
+		// this.prev();
+        this.swiper.slidePrev()
 	},
 
 	onClick_next : function(e){
-		this.next();
+		// this.next();
+        this.swiper.slideNext()
 	},
 
     onClick_start : function(e){
@@ -121,6 +124,10 @@ App.Views.SessionView = Backbone.View.extend({
 	},
 
     setEle : function(){
+		if(this.swiper) {
+            this.checkBtn(this.currentQuestionIndex);
+			return;
+        }
     	App.GlobalVars.isShow_loading = false;
         if(App.GlobalVars.isReset_session) this.currentQuestionIndex = 0;
         this.totalQuestion = App.GlobalVars.json_setting_data.qlist.length;
@@ -140,6 +147,20 @@ App.Views.SessionView = Backbone.View.extend({
 			}
 		}
         this.checkBtn(this.currentQuestionIndex);
+
+
+        this.swiper = new Swiper('.swiper-container', {
+               onSlideChangeEnd:this.onSwipeEnd
+        });
+	},
+
+    onSwipeEnd: function(){
+		var _this = App.sessionView;
+		var sindex = _this.swiper.activeIndex;
+        _this.currentQuestionIndex = sindex;
+        App.GlobalVars.current_q_index = sindex;
+        _this.checkBtn(_this.currentQuestionIndex);
+        console.log(_this.currentQuestionIndex, _this.swiper.activeIndex)
 	},
 
 	prev : function(){
@@ -161,10 +182,10 @@ App.Views.SessionView = Backbone.View.extend({
 	},
 
 	changeQuestion : function(index){
-		this.hideQuestion(this.currentQuestionIndex);
+		// this.hideQuestion(this.currentQuestionIndex);
         this.currentQuestionIndex = index;
         App.GlobalVars.current_q_index = index;
-        this.showQuestion(this.currentQuestionIndex);
+        // this.showQuestion(this.currentQuestionIndex);
         this.checkBtn(this.currentQuestionIndex);
 	},
 
@@ -173,7 +194,7 @@ App.Views.SessionView = Backbone.View.extend({
 	},
 
 	hideQuestion : function(index){
-        this.$el.find('.swiper-wrapper li').eq(index).addClass('hide');
+        // this.$el.find('.swiper-wrapper li').eq(index).addClass('hide');
 	},
 
 	checkBtn : function(index){
@@ -208,9 +229,18 @@ App.Views.SessionView = Backbone.View.extend({
 
 	resetTimer : function(){
         this.timerNum = 0;
+        var bar = $(".timer-guage");
+        TweenMax.killTweensOf(bar);
+        var bar = $(".timer-guage")
+        TweenMax.to(bar, 1, {width:"0%"});
+        console.log("reset	")
+
 	},
 
 	startTimer : function(){
+        var bar = $(".timer-guage")
+        TweenMax.to(bar, 1, {width:(this.timerNum+1) * 10+"%", ease:Linear.easeNone});
+
 		this.timer = window.setInterval(function(){
 			var _this = App.sessionView;
 			_this.timerEventHandler();
@@ -223,7 +253,12 @@ App.Views.SessionView = Backbone.View.extend({
 
 	timerEventHandler : function(){
 		this.timerNum++
-		console.log("session timer : ", this.timerNum);
+        // $(".timer-guage").css("width", this.timerNum * 10 + "%")
+
+		var bar = $(".timer-guage")
+        TweenMax.to(bar, 1, {width:(this.timerNum+1) * 10+"%", ease:Linear.easeNone});
+
+        console.log("session timer : ", this.timerNum);
 		if(this.timerNum == this.maxTime){
 			this.completeTime();
 		}
@@ -241,10 +276,12 @@ App.Views.SessionView = Backbone.View.extend({
 
 	showCount : function(){
 		this.$el.find('.timer-con').removeClass('hide');
+		$(".swiper-container").css("pointer-events", "none")
 	},
 
 	hideCount : function(){
         this.$el.find('.timer-con').addClass('hide');
+        $(".swiper-container").css("pointer-events", "auto")
 	},
 
     setEndData : function(){
@@ -262,6 +299,7 @@ App.Views.SessionView = Backbone.View.extend({
     },
 
     onComplete_setEndData: function(json){
+
 		this.goMain();
     },
 

@@ -2,6 +2,7 @@ App.Views.MainView = Backbone.View.extend({
 	initialize : function(obj){
 		this.addEvent();
 		this.container = $("#main-wrapper");
+		this.timer;
 	},
 
 	// 페이지 렌더링
@@ -64,7 +65,11 @@ App.Views.MainView = Backbone.View.extend({
 	// 이벤트 생성
 	addEvent : function(){
 		this.$el.find(".btn-number").on(App.GlobalVars.CLICK, this.onClick_number);
-		console.log(this.$el.find(".btn-number"))
+        this.$el.find(".qna-btn").on(App.GlobalVars.CLICK, this.onClick_qna);
+
+        $(".qna-popup .btn-register").on(App.GlobalVars.CLICK, this.sendQna);
+        $(".qna-popup .btn-close").on(App.GlobalVars.CLICK, this.qnaClose);
+        $(".complete-popup .btn-confirm").on(App.GlobalVars.CLICK, this.qnaClose);
 	},
 
 	// 이벤트 제거
@@ -83,12 +88,17 @@ App.Views.MainView = Backbone.View.extend({
 		var num = $(e.currentTarget).attr("index")
 		App.mainView.setSendNumber(num)
 
+		e.preventDefault();
+		return false;
+
 	},
 
 	setSendNumber: function(index){
 		$(".alert-number p").html(index);
 
-		setTimeout(this.sendValue, 1000)
+		clearTimeout(this.timer);
+        this.timer = setTimeout(this.sendValue, 1000);
+
 		// this.sendValue();
 	},
 
@@ -105,6 +115,27 @@ App.Views.MainView = Backbone.View.extend({
 		console.log("complete")
         $(".alert-number p").html("");
 
+	},
+
+    onClick_qna: function(){
+		$("body").addClass("show-popup");
+        $(".qna-popup").removeClass("hide");
+
+        /*$(".qna-popup .btn-register").on(App.GlobalVars.CLICK, App.mainView.sendQna);
+        $(".qna-popup .btn-close").on(App.GlobalVars.CLICK, App.mainView.qnaClose);
+        $(".complete-popup .btn-confirm").on(App.GlobalVars.CLICK, App.mainView.qnaClose);*/
+
+	},
+
+	sendQna: function(){
+        $(".qna-popup").addClass("hide");
+        $(".complete-popup").removeClass("hide");
+	},
+
+	qnaClose: function(){
+        $("body").removeClass("show-popup");
+        $(".qna-popup").addClass("hide");
+        $(".complete-popup").addClass("hide");
 	}
 
 
