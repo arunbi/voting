@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Voting</title>
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
+        <link rel="stylesheet" href="./css/common.css" />
+        <link rel="stylesheet" href="./css/style.css?v=201703132229" />
+        <!--<link rel="stylesheet" href="./css/swiper.min.css">-->
+
+        <script type="text/javascript" charset="utf-8">
+
+            document.addEventListener("deviceready", onDeviceReady, false);
+
+            function onDeviceReady(){
+
+                App.start();
+
+                document.addEventListener("offline", onOffline, false);
+                document.addEventListener("pause", onPause, false);
+                document.addEventListener("resume", onResume, false);
+
+                $("#wrapper").addClass("packing")
+            }
+
+            function onPause(){
+                //pauseAudio();
+            }
+
+            function onResume(){
+                //playAudio();
+            }
+
+            function onOffline(){
+                showAlert('network not found', '네트워크에 연결을 찾을수 없습니다.' , ' Done');
+            }
+
+            function showAlert(message, callback, title, buttonName) {
+
+                if(navigator.notification && navigator.notification.alert){
+
+                    navigator.notification.confirm(
+                            message,    // message
+                            callback,   // callback
+                            title,      // title
+                            buttonName  // buttonName
+                    );
+
+                }else{
+
+                    alert(message);
+                    callback();
+                }
+            }
+
+
+            var my_media;
+            function playAudio() {
+                console.log("play sound")
+                // Play the audio file at url
+//                my_media.play({numberOfLoops:100});
+            }
+
+            function pauseAudio(){
+                console.log("stop sound")
+//                my_media.pause();
+            }
+
+        </script>
+    </head>
+    <body > <!-- @hi: class="show-popup" 을 팝업 노출시 body 에 붙여주고 해당 팝업(.qna-popup 또는 .complete-popup)에 붙어있는 hide 제거-->
+        <div id="preload" class="hidden">
+            <p class="percent">0</p>
+            <div class="preload-guide"></div>
+        </div>
+
+        <div id="wrapper" class="wrapper">
+
+            <div class="content-wrapper hide">
+
+                <div id="main-wrapper" class="hidden">
+                    <div class="screen">
+                        <!--<div class="num-bg"><img src="img/numBg.png"></div>-->
+                        <div class="screen-logo">
+                            <img class="logo-img" src="assets/logo_600_220.jpg">
+                            <!--<img class="logo-overlay" src="img/class.png">-->
+                        </div>
+                        <!--<p>-</p>-->
+                    </div>
+                    <div class="key-area">
+                        <div>
+                            <a href="#" class="btn-number" index="1"><p>1</p></a>
+                            <a href="#" class="btn-number" index="2"><p>2</p></a>
+                            <a href="#" class="btn-number" index="3"><p>3</p></a>
+                        </div>
+                        <div>
+                            <a href="#" class="btn-number" index="4"><p>4</p></a>
+                            <a href="#" class="btn-number" index="5"><p>5</p></a>
+                            <a href="#" class="btn-number" index="6"><p>6</p></a>
+                        </div>
+                        <div>
+                            <a href="#" class="btn-number" index="7"><p>7</p></a>
+                            <a href="#" class="btn-number" index="8"><p>8</p></a>
+                            <a href="#" class="btn-number" index="9"><p>9</p></a>
+                        </div>
+                        <div>
+                            <div class="alert-number" index="7"><p></p></div>
+                        </div>
+                    </div>
+                    <div class="content-btn">
+                        <a href="#" class="survey-btn"><p>설문하기</p></a>
+                        <a href="#" class="qna-btn"><p>질문하기</p></a>
+                        <a href="#" class="agenda-btn"><p>아 젠 다</p></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dimmed"></div>
+
+            <div class="qna-popup hide">
+                <a href="#" class="btn-close"></a>
+                <div class="qna-content">
+                    <textarea cols="30" name="contents" placeholder="질문을 입력해 주세요."></textarea>
+                    <a href="#" class="btn-register">등록</a>
+                </div>
+            </div>
+
+            <div class="complete-popup hide">
+                <p class="message">질문이 등록되었습니다.</p>
+                <a href="#" class="btn-confirm">확인</a>
+            </div>
+
+           <!-- <div id="no-btn" class="hidden">
+                <img src="img/rotate.png">
+            </div>-->
+        </div>
+
+
+
+
+
+
+
+        <script type="text/javascript" src="./js/vendor/jquery.min.js"></script>
+        <script type="text/javascript" src="./js/vendor/iscroll.js"></script>
+        <script type="text/javascript" src="./js/vendor/underscore-min.js"></script>
+        <script type="text/javascript" src="./js/vendor/backbone-min.js"></script>
+        <script type="text/javascript" src="./js/vendor/swiper.min.js"></script>
+        <script type="text/javascript" src="./js/interactive/App.js"></script>
+        <script type="text/javascript" src="./js/interactive/views/common/ResizeView.js"></script>
+        <script type="text/javascript" src="./js/interactive/views/common/UtilView.js"></script>
+        <script type="text/javascript" src="./js/interactive/views/MainView.js"></script>
+
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready(function() {
+                App.start({});
+            });
+        </script>
+
+    </body>
+</html>

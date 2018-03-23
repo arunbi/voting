@@ -57,16 +57,20 @@ var App = new (Backbone.Router.extend({
                 vars[hash[0]] = hash[1];
             }
 
-            console.log(vars)
+            if(!vars.lstno){
+            	alert("잘못된 접근입니다.")
+                window.location = "index.html"
+				return false;
+			} else {
+            	App.GlobalVars.lstno = vars.lstno;
+            	App.GlobalVars.uno = vars.uno;
+			}
 
-            // localStorage.setItem("lstno", hash[1]);
-            // localStorage.setItem("uno", hash[1]);
-        }
-
-
-        // var prev = prevPage.replace("#/", "")
-
-
+        } else {
+            alert("잘못된 접근입니다.")
+            window.location = "index.html"
+            return false;
+		}
 
 		this.getData();
 	},
@@ -113,6 +117,9 @@ var App = new (Backbone.Router.extend({
 		/* device size */
 		DEVICE_WIDTH : 1024,
 		DEVICE_HEIGHT : 748,
+
+		lstno : "",
+        uno : "",
 
 		/* data url */
 
@@ -167,7 +174,7 @@ var App = new (Backbone.Router.extend({
 		var url = App.GlobalVars.GET_USER_SETTING_DATA_URL;
 		if(App.GlobalVars.isDebugMode) url = App.GlobalVars.DEBUG_GET_USER_SETTING_DATA_URL;
 
-		var data = {}
+		var data = {"lstno":App.GlobalVars.lstno}
 		App.getJsonData(url, data, this.getDataComplete)
 	},
 
@@ -177,10 +184,10 @@ var App = new (Backbone.Router.extend({
 
 		App.GlobalVars.SET_VOTING_VALUE_URL = json.voting_url;
 		App.GlobalVars.QNA_URL = json.qna_url;
-		App.GlobalVars.SURVEY_URL = json.survey_url;
+		App.GlobalVars.SURVEY_URL = json.survey_url + "?lstno="+App.GlobalVars.lstno+"&uno="+App.GlobalVars.uno;
 		$(".survey-btn").attr("href", App.GlobalVars.SURVEY_URL);
 
-		App.GlobalVars.AGENDA_URL = json.agenda_url;
+		App.GlobalVars.AGENDA_URL = json.agenda_url + "?lstno="+App.GlobalVars.lstno+"&uno="+App.GlobalVars.uno;
         $(".agenda-btn").attr("href", App.GlobalVars.AGENDA_URL);
 
 		$(".logo-img").attr("src", json.logo);

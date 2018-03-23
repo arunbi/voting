@@ -3,6 +3,8 @@ App.Views.MainView = Backbone.View.extend({
 		this.addEvent();
 		this.container = $("#main-wrapper");
 		this.timer;
+		this.curIndex = 0;
+		this.nobtn = false;
 	},
 
 	// 페이지 렌더링
@@ -94,32 +96,43 @@ App.Views.MainView = Backbone.View.extend({
 	},
 
 	setSendNumber: function(index){
-		$(".alert-number p").html(index);
+
+	    if(App.mainView.nobtn) return;
+
+        this.curIndex = index;
+
+        this.$el.find('.alert-number').children().remove();
+
+        var ele = '<p class="number_animate">'
+            + this.curIndex
+            +'</p>'
+        this.$el.find('.alert-number').append(ele);
 
 		clearTimeout(this.timer);
-        this.timer = setTimeout(this.sendValue, 1000);
-
-		// this.sendValue();
+        this.timer = setTimeout(this.sendValue, 2500);
 	},
 
 	sendValue: function(){
+        App.mainView.nobtn = true;
 
         var url = App.GlobalVars.SET_VOTING_VALUE_URL;
         if(App.GlobalVars.isDebugMode) url = App.GlobalVars.DEBUG_SET_VOTING_VALUE_URL;
 
-		App.getJsonData(url, {}, App.mainView.sendValueComplete)
-
+        var data = {"lstno":App.GlobalVars.lstno, "uno":App.GlobalVars.uno, "value": App.mainView.curIndex}
+		App.getJsonData(url, data, App.mainView.sendValueComplete);
 	},
 
     sendValueComplete: function(){
-		console.log("complete")
-        $(".alert-number p").html("");
-
+		// console.log("complete")
+        $('.alert-number').children().remove();
+        App.mainView.nobtn = false;
 	},
 
-    onClick_qna: function(){
+    onClick_qna: function(e){
 		$("body").addClass("show-popup");
         $(".qna-popup").removeClass("hide");
+        e.preventDefault();
+        return false;
 
         /*$(".qna-popup .btn-register").on(App.GlobalVars.CLICK, App.mainView.sendQna);
         $(".qna-popup .btn-close").on(App.GlobalVars.CLICK, App.mainView.qnaClose);
@@ -127,15 +140,30 @@ App.Views.MainView = Backbone.View.extend({
 
 	},
 
-	sendQna: function(){
-        $(".qna-popup").addClass("hide");
-        $(".complete-popup").removeClass("hide");
+	sendQna: function(e){
+        var value =  $(".qna-content textarea").val();
+
+        var url = App.GlobalVars.QNA_URL;
+        if(App.GlobalVars.isDebugMode) url = App.GlobalVars.DEBUG_QNA_URL;
+
+        var data = {"lstno":App.GlobalVars.lstno, "uno":App.GlobalVars.uno, "value": value};
+        App.getJsonData(url, data, App.mainView.sendQnaComplete);
+        e.preventDefault();
+        return false;
 	},
 
-	qnaClose: function(){
+    sendQnaComplete: function(){
+        $(".qna-popup").addClass("hide");
+        $(".complete-popup").removeClass("hide");
+        $(".qna-content textarea").val("")
+    },
+
+	qnaClose: function(e){
         $("body").removeClass("show-popup");
         $(".qna-popup").addClass("hide");
         $(".complete-popup").addClass("hide");
+        e.preventDefault();
+        return false;
 	}
 
 
