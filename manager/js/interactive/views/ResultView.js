@@ -7,6 +7,7 @@ App.Views.ResultView = Backbone.View.extend({
         this.timerNum = 0;
 
         this.timer = "";
+        this.timeArr = [];
 	},
 
 	// 페이지 렌더링
@@ -56,6 +57,7 @@ App.Views.ResultView = Backbone.View.extend({
 		this.$el.off("webkitAnimationEnd");
 		this.$el.removeClass("alphOut_animate");
         this.timerNum = 0;
+        $(".loading-con .loading-box .load-guage").css("width", 0);
 	},
 
 	// 이벤트 생성
@@ -83,12 +85,15 @@ App.Views.ResultView = Backbone.View.extend({
 	},
 
 	showLoading : function(){
-		this.$el.find('.loading-con').removeClass('hide');
-		this.startTimer();
+		this.$el.find('.loading-con').removeClass('hide-obj');
+		// this.startTimer();
+
+		var loadingBar = $(".loading-con .loading-box .load-guage");
+        TweenMax.to(loadingBar, this.maxTime, {width:100+"%", ease:Cubic.easeInOut, onComplete:App.resultView.completeTime});
 	},
 
 	hideLoading : function(){
-        this.$el.find('.loading-con').addClass('hide');
+        this.$el.find('.loading-con').addClass('hide-obj');
 	},
 
 	startTimer : function(){
@@ -111,8 +116,33 @@ App.Views.ResultView = Backbone.View.extend({
     },
 
     completeTime : function(){
-    	this.stopTimer();
-		this.hideLoading();
+		console.log("completeTimecompleteTimecompleteTime")
+    	// this.stopTimer();
+		var _this = App.resultView
+        _this.hideLoading();
+        if(App.GlobalVars.isShow_loading){
+            _this.startGraph();
+        }
+
+	},
+
+	startGraph: function(){
+
+        var graph = $(".graph");
+
+        console.log("startGraph", graph)
+
+		for(var i=0 ; i<graph.length ; i++){
+            var graphObj = $(graph[i]);
+            var graphNumObj = $(graphObj.find(".percent"));
+
+            graphNumObj.css("opacity", 0);
+            graphNumObj.html($(graph[i]).attr("data-percent")+"%")
+
+            TweenMax.to(graphObj, 1, {delay:i*0.2, height:$(graph[i]).attr("data-percent")+"%", ease:Cubic.easeInOut});
+            TweenMax.to(graphNumObj, 0.5, {delay:i*0.25, opacity:1, ease:Cubic.easeInOut});
+
+		}
 	},
 
     onClick_close : function(){
@@ -149,14 +179,22 @@ App.Views.ResultView = Backbone.View.extend({
 		var len = json.result.length;
 		for(var i=0; i<len; i++){
 			var ele = '<li>'
-							+'<div class="graph" style="height: '+json.result[i].percent+'%;">'
-								+'<span class="percent">'+json.result[i].percent+'%</span>'
+                // +'<div class="graph" style="height: '+json.result[i].percent+'%;">'
+							+'<div class="graph" data-percent="'+json.result[i].percent+'">'
+								+'<span class="percent" data-percent="'+json.result[i].percent+'">'+0+'%</span>'
 								+'<span class="graph-guage"></span>'
 							+'</div>'
 							+'<span class="session-num">'+json.result[i].exam+'</span>'
 						+'</li>'
 			this.$el.find('.result-graph ol').append(ele);
 		}
+
+		var ml = 500 / len;
+		$(".result-con .result-graph li").css("margin-left", ml);
+
+        if(!App.GlobalVars.isShow_loading){
+            this.startGraph();
+        }
 	},
 
 	goSession : function(){

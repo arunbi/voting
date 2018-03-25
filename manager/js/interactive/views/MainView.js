@@ -109,6 +109,9 @@ App.Views.MainView = Backbone.View.extend({
 		this.$el.find('.vtitle').text(vtitle);
 		this.$el.find('.vday').text(vday);
 		this.$el.find('.vloc').text(vloc);
+
+        $('.loading-con .title').text(vtitle);
+        $('.result-con .title').text(vtitle);
 	},
 
 	onClick_session : function(e){

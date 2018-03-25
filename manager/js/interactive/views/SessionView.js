@@ -231,15 +231,13 @@ App.Views.SessionView = Backbone.View.extend({
         this.timerNum = 0;
         var bar = $(".timer-guage");
         TweenMax.killTweensOf(bar);
-        var bar = $(".timer-guage")
         TweenMax.to(bar, 1, {width:"0%"});
-        console.log("reset	")
 
 	},
 
 	startTimer : function(){
         var bar = $(".timer-guage")
-        TweenMax.to(bar, 1, {width:(this.timerNum+1) * 10+"%", ease:Linear.easeNone});
+        TweenMax.to(bar, 1, {width:(this.timerNum+1) * (100/this.maxTime)+"%", ease:Linear.easeNone});
 
 		this.timer = window.setInterval(function(){
 			var _this = App.sessionView;
@@ -256,7 +254,7 @@ App.Views.SessionView = Backbone.View.extend({
         // $(".timer-guage").css("width", this.timerNum * 10 + "%")
 
 		var bar = $(".timer-guage")
-        TweenMax.to(bar, 1, {width:(this.timerNum+1) * 10+"%", ease:Linear.easeNone});
+        TweenMax.to(bar, 1, {width:(this.timerNum+1) * (100/this.maxTime)+"%", ease:Linear.easeNone});
 
         console.log("session timer : ", this.timerNum);
 		if(this.timerNum == this.maxTime){
