@@ -160,6 +160,26 @@ a {
 .show-popup .wrapper { min-height: auto;}
 .show-popup .wrapper .dimmed {display: block;}
 
+@media screen and (min-width: 747px) {
+    .wrapper {width: 747px; margin: 0 auto; padding: 50px 0 100px; min-height: auto;}
+    .wrapper .screen-logo {height: 224px;}
+    .wrapper .key-area {width: 556px; margin: 0 auto;}
+    .wrapper .key-area > div {margin-top: 38px;}
+    .wrapper .key-area .btn-number {width: 160px; height: 160px; margin-left: 38px; line-height: 160px; font-size: 70px; box-sizing: border-box;}
+    .wrapper .key-area .alert-number {width: 160px; height: 160px; line-height: 160px; font-size: 70px; box-sizing: border-box;}
+    .wrapper .content-btn {width: 556px; margin: 100px auto 0; padding: 0;}
+    .wrapper .content-btn > a {font-size: 35px;}
+
+    .wrapper .qna-popup {position: fixed; left: 50%; top: 50%; width: 676px; height: 782px; margin-top: -391px; margin-left: -338px;}
+    .wrapper .qna-popup textarea {height: 678px; font-size: 33px;}
+    .wrapper .qna-popup .btn-close {width: 43px; height: 43px; margin-top: 60px}
+    .wrapper .qna-popup .btn-register {font-size: 33px; line-height: 104px; border-radius: 0 0 10px 10px;}
+
+    .wrapper .complete-popup {position: fixed; left: 50%; top: 50%; width: 676px; height: 312px; margin-top: -156px; margin-left: -338px;}
+    .wrapper .complete-popup .message {height: 208px; font-size: 33px; line-height: 208px; border-radius: 10px 10px 0 0;}
+    .wrapper .complete-popup .btn-confirm {font-size: 33px; line-height: 104px; border-radius: 0 0 10px 10px;}
+}
+
 
 /*.wrapper #qna-wrapper { display: block; position: fixed; left: 0; bottom: 0; width: 100%; font-size: 0; background-color: #fff;}
 .wrapper #qna-wrapper textarea {
