@@ -16,7 +16,8 @@ body {font-family:"NotoSans"; background-color: #FFFFFF}
 
 /* global */
 .hide {display:none!important;}
-.wrapper {position:relative;width:1024px; height:748px; margin: 0 auto; overflow: hidden;}
+/*.wrapper {position:relative;width:1024px; height:748px; margin: 0 auto; overflow: hidden;}*/
+.wrapper {position:absolute;width:1024px; height:748px; margin: 0 auto; overflow: hidden; left: 50%; top:50%; margin-left: -512px; margin-top: -374px;}
 
 img {-webkit-touch-callout: none; -webkit-user-select: none;}
 .touch-return {-webkit-touch-callout: none; -webkit-user-select: none;}

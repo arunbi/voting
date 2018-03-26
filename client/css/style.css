@@ -95,6 +95,7 @@ a {
 .wrapper .content-btn > a {display: inline-block; padding-bottom: 1%; font-size: 4.6875vw; color: #dedede; border-bottom: 1px solid #dedede; overflow: hidden}
 .wrapper .content-btn .survey-btn {float: left;}
 .wrapper .content-btn .agenda-btn {float: right;}
+.wrapper .content-btn .dimmed-btn {pointer-events: none; opacity: 0.2}
 
 .wrapper .dimmed {
     display: none;

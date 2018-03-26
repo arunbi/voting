@@ -106,7 +106,7 @@ var App = new (Backbone.Router.extend({
 	//	글로벌 변수
 	/////////////////////////////////////////////
 	GlobalVars : {
-		isDebugMode : true,
+		isDebugMode : false,
 
 		/* window size */
 		window_width : 0,
@@ -184,11 +184,22 @@ var App = new (Backbone.Router.extend({
 
 		App.GlobalVars.SET_VOTING_VALUE_URL = json.voting_url;
 		App.GlobalVars.QNA_URL = json.qna_url;
-		App.GlobalVars.SURVEY_URL = json.survey_url + "?lstno="+App.GlobalVars.lstno+"&uno="+App.GlobalVars.uno;
-		$(".survey-btn").attr("href", App.GlobalVars.SURVEY_URL);
+		App.GlobalVars.SURVEY_URL = json.survey_url == "" ? "" : json.survey_url + "?lstno="+App.GlobalVars.lstno+"&uno="+App.GlobalVars.uno;
+		if(App.GlobalVars.SURVEY_URL == ""){
+			//dimmed
+            $(".survey-btn").addClass("dimmed-btn")
+		} else {
+            $(".survey-btn").attr("href", App.GlobalVars.SURVEY_URL);
+		}
 
-		App.GlobalVars.AGENDA_URL = json.agenda_url + "?lstno="+App.GlobalVars.lstno+"&uno="+App.GlobalVars.uno;
-        $(".agenda-btn").attr("href", App.GlobalVars.AGENDA_URL);
+
+		App.GlobalVars.AGENDA_URL = json.agenda_url == "" ? "" : json.agenda_url + "?lstno="+App.GlobalVars.lstno+"&uno="+App.GlobalVars.uno;
+		if(App.GlobalVars.AGENDA_URL == ""){
+            $(".agenda-btn").addClass("dimmed-btn")
+		} else {
+            $(".agenda-btn").attr("href", App.GlobalVars.AGENDA_URL);
+		}
+
 
 		$(".logo-img").attr("src", json.logo);
 		$("#wrapper").css("background-color", json.bgcolor);
