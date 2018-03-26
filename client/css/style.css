@@ -2,13 +2,13 @@
 @font-face
 {
     font-family:NotoSans;
-    src: url("../fonts/NotoSansCJKkr-Medium.OTF");
+    src: url("../fonts/NotoSansCJKkr-Medium.otf");
 }
 
 @font-face
 {
     font-family:NotoSansBold;
-    src: url("../fonts/NotoSansCJKkr-Bold.OTF");
+    src: url("../fonts/NotoSansCJKkr-Bold.otf");
 }
 
 body {font-family:"NotoSans"; background-color: #ffffff}
