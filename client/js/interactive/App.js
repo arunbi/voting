@@ -191,7 +191,7 @@ var App = new (Backbone.Router.extend({
         $(".agenda-btn").attr("href", App.GlobalVars.AGENDA_URL);
 
 		$(".logo-img").attr("src", json.logo);
-		$("body").css("background-color", json.bgcolor);
+		$("#wrapper").css("background-color", json.bgcolor);
 		$(".btn-number").css("color", json.txtcolor);
 
 		$(".survey-btn").css("color", json.txtcolor);

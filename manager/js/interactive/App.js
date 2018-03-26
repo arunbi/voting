@@ -97,7 +97,7 @@ var App = new (Backbone.Router.extend({
 	//	글로벌 변수
 	/////////////////////////////////////////////
 	GlobalVars : {
-		isDebugMode : true,
+		isDebugMode : false,
 
 		/* window size */
 		window_width : 0,

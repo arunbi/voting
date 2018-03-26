@@ -3,6 +3,9 @@ App.Views.QnaView = Backbone.View.extend({
 		this.addEvent();
 		this.container = $(".qna-con");
 		this.jsonData = ""
+		this.timer;
+		this.isContentsCurrent = true;
+		this.isShowPopup = false;
 	},
 
 	// 페이지 렌더링
@@ -22,7 +25,7 @@ App.Views.QnaView = Backbone.View.extend({
 			this.$el.addClass("alphaIn_animate");
 		}
 
-        this.getQnaData()
+        this.getQnaData();
 
 	},
 
@@ -35,6 +38,7 @@ App.Views.QnaView = Backbone.View.extend({
 	// 감추기
 	hide : function(route){
 
+        clearTimeout(this.timer);
 		this.$el.on("webkitAnimationEnd", _.bind(this.hideComplete, this));
 
 		if(route == App.GlobalVars.ROUTER_MAIN){
@@ -100,6 +104,7 @@ App.Views.QnaView = Backbone.View.extend({
 	},
 
 	showContentsCurrent : function(){
+        this.isContentsCurrent = true;
 		var current = App.GlobalVars.current_session_index;
 
         this.hideBtnCurrent();
@@ -108,13 +113,17 @@ App.Views.QnaView = Backbone.View.extend({
         this.$el.find('.qna-session').addClass('hide');
         this.$el.find('.qna-session').eq(current).removeClass('hide');
 
+        this.reloadQnaData();
 	},
 
 	showContentsAll : function(){
+        this.isContentsCurrent = false;
         this.hideBtnAll();
         this.showBtnCurrent();
 
         this.$el.find('.qna-session').removeClass('hide');
+
+        this.reloadQnaData();
 	},
 
 	onClick_list : function(e){
@@ -131,18 +140,29 @@ App.Views.QnaView = Backbone.View.extend({
 	},
 
 	showPopup : function(){
-
+        this.isShowPopup = true;
 		this.$el.find('.qna-pop').removeClass('hide');
 	},
 
 	hidePopup : function(){
+        this.isShowPopup = false;
         this.$el.find('.qna-pop').addClass('hide');
+        this.getQnaData();
 	},
 
 	setQnaPopup : function(one, two){
         var session = this.getSession(one);
 		var text = session[two].value;
 		this.$el.find('.qna-pop p').text(text);
+	},
+
+
+
+    reloadQnaData: function(){
+        clearTimeout(this.timer);
+		if(!this.isShowPopup){
+			this.timer = setTimeout(App.qnaView.getQnaData, 3000);
+        }
 	},
 
 	getQnaData : function(){
@@ -156,12 +176,12 @@ App.Views.QnaView = Backbone.View.extend({
             "sessno":sessno+1
         }
 
-        App.getJsonData(url, data, _.bind(this.onComplete_getQnaData, this))
+        App.getJsonData(url, data, App.qnaView.onComplete_getQnaData)
 	},
 
 	onComplete_getQnaData : function(json){
-		this.jsonData = json;
-		this.setQnaData(json);
+        App.qnaView.jsonData = json;
+        App.qnaView.setQnaData(json);
 	},
 
 	setQnaData : function(json){
@@ -190,7 +210,7 @@ App.Views.QnaView = Backbone.View.extend({
 
 			this.$el.find(".qna-area ol").append(oneEle)
 
-			console.log(qLen)
+
 			for(var j=0; j<qLen; j++){
 				var twoEle = '<li><a href="#" data-one="'+i+'" data-two="'+j+'">'+session[j].value+'</a></li>';
                 this.$el.find(".qna-area ol>li").eq(i).find(">ul").append(twoEle);
@@ -200,7 +220,14 @@ App.Views.QnaView = Backbone.View.extend({
 
         this.$el.find(".qna-area ol>li>ul>li>a").off(App.GlobalVars.CLICK);
         this.$el.find(".qna-area ol>li>ul>li>a").on(App.GlobalVars.CLICK, _.bind(this.onClick_list,this));
-		this.showContentsCurrent();
+
+        if(this.isContentsCurrent){
+            this.showContentsCurrent();
+        } else {
+            this.showContentsAll();
+        }
+
+        this.reloadQnaData();
 	},
 
 	getSession : function(index){
