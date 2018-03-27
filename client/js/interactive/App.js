@@ -73,6 +73,10 @@ var App = new (Backbone.Router.extend({
 		}
 
 		this.getData();
+
+        $(window).on("resize", _.bind(this.onResize, this));
+        this.onResize();
+        console.log("start")
 	},
 
 
@@ -223,6 +227,19 @@ var App = new (Backbone.Router.extend({
         Backbone.history.start();
 
 	},
+
+
+    onResize : function(){
+        var w = $(window).width();
+        var h = $(window).height();
+
+        if(w > h){
+            $("#no-btn").removeClass("hide");
+        } else {
+            $("#no-btn").addClass("hide");
+        }
+
+    },
 
 
 	/////////////////////////////////////////////
