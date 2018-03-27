@@ -91,8 +91,15 @@ App.Views.StartView = Backbone.View.extend({
 	},
 
 	onComplete_getSettingData : function(json){
-        App.GlobalVars.json_setting_data = json;
-       this.goMain();
+		console.log(json.status)
+		if(json.status == 0){
+            showAlert("진행키를 확인해 주십시오.", function(){}, "", "Done")
+
+
+		} else {
+            App.GlobalVars.json_setting_data = json;
+            this.goMain();
+		}
 	},
 
 	goMain : function(){

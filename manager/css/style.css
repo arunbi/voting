@@ -147,13 +147,13 @@ a {
 
 }
 .session-con .btns-area a {display: inline-block; width: 100px; font-size: 16px; border-right: 1px solid #f1f1f1; line-height: 54px; text-align: center;}
-.session-con .btns-area .current {position: absolute; right: 0; bottom: 0; display: block; width: 100px; font-size: 16px; border-left: 1px solid #f1f1f1; line-height: 54px; text-align: center;}
+.session-con .btns-area .current {position: absolute; right: 0; bottom: 0; display: block; width: 100px; font-size: 16px; border-left: 1px solid #f1f1f1; line-height: 54px; text-align: center; background-color: #bfbfbf;}
 
 .session-con .timer-con {position: absolute; bottom: 0; left: 0; width: 100%; height: 54px; background-color: #fff; border-top: 1px solid #f1f1f1;  background-color: #eeeeee}
 .session-con .timer-con.active {display: block;}
 .session-con .timer-con .timer {width: 924px; height: 100%;}
 .session-con .timer-con .timer .timer-guage {display: block; height: 100%; background-color: #ff1744;}
-.session-con .timer-con .btn-stop {position: absolute; right: 0; bottom: 0; display: block; width: 100px; font-size: 16px; border-left: 1px solid #f1f1f1; line-height: 54px; text-align: center;}
+.session-con .timer-con .btn-stop {position: absolute; right: 0; bottom: 0; display: block; width: 100px; font-size: 16px; border-left: 1px solid #f1f1f1; line-height: 54px; text-align: center; background-color: #bfbfbf;}
 
 /* result */
 .result-con {position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #fff;}
@@ -165,7 +165,7 @@ a {
 .result-con .result-graph li {display: inline-block; position: relative; vertical-align: bottom; width: 40px; height: 100%; margin-left: 120px;}
 .result-con .result-graph li:first-child {margin-left: 0!important;}
 .result-con .result-graph .graph {position: absolute; left: 50%; bottom: 0; display: inline-block; width:16px; margin-left: -8px; background-color: #ff1744; vertical-align: bottom; border-radius: 8px 8px 0 0;}
-.result-con .result-graph li .percent {position: absolute; bottom: 105%; left: -20px; width: 60px; text-align: center; font-size: 20px; overflow: hidden;}
+.result-con .result-graph li .percent {position: absolute; bottom: 105%; left: -30px; width: 80px; text-align: center; font-size: 20px; overflow: hidden;}
 .result-con .result-graph .session-num {display: inline-block; position: relative; padding-top: 360px; line-height: 3;}
 
 /* loading */

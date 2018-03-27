@@ -45,7 +45,7 @@ var App = new (Backbone.Router.extend({
 
 		App.GlobalVars.prev_page = App.GlobalVars.current_page;
 		App.GlobalVars.current_page = "#/"+route;
-		//console.log(App.GlobalVars.prev_page , App.GlobalVars.current_page )
+		console.log(App.GlobalVars.prev_page , App.GlobalVars.current_page )
 		App.GlobalVars.current_view.show(App.GlobalVars.prev_page);
 
 	},

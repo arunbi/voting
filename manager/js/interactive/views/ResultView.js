@@ -139,7 +139,9 @@ App.Views.ResultView = Backbone.View.extend({
             graphNumObj.css("opacity", 0);
             graphNumObj.html($(graph[i]).attr("data-percent")+"%")
 
-            TweenMax.to(graphObj, 1, {delay:i*0.2, height:$(graph[i]).attr("data-percent")+"%", ease:Cubic.easeInOut});
+			var per = parseInt( $(graph[i]).attr("data-percent") );
+
+            TweenMax.to(graphObj, 1, {delay:i*0.2, height:per+"%", ease:Cubic.easeInOut});
             TweenMax.to(graphNumObj, 0.5, {delay:i*0.25, opacity:1, ease:Cubic.easeInOut});
 
 		}

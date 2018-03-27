@@ -20,8 +20,19 @@ App.Views.SessionView = Backbone.View.extend({
 	// 보여주기
 	show : function(prevPage){
 
+
+
 		this.$el.removeClass("hide");
 		this.$el.on("webkitAnimationEnd", _.bind(this.showComplete, this));
+
+        if(prevPage == App.GlobalVars.ROUTER_RESULT || prevPage == App.GlobalVars.ROUTER_QNA){
+
+        } else {
+            //reset
+
+            this.resetEle();
+            this.setEle();
+        }
 
 		if(prevPage == App.GlobalVars.ROUTER_MAIN){
 			this.$el.addClass("alphaIn_animate");
@@ -29,7 +40,8 @@ App.Views.SessionView = Backbone.View.extend({
 			this.$el.addClass("alphaIn_animate");
 		}
 
-		this.setEle();
+        App.GlobalVars.isShow_loading = false;
+
 
 
 	},
@@ -45,7 +57,7 @@ App.Views.SessionView = Backbone.View.extend({
 		this.$el.on("webkitAnimationEnd", _.bind(this.hideComplete, this));
 
 		if(route == App.GlobalVars.ROUTER_MAIN){
-            this.swiper.slideTo(0);
+            //this.swiper.slideTo(0);
 			this.$el.addClass("alphOut_animate");
 		} else {
 			this.$el.addClass("alphOut_animate");
@@ -100,6 +112,8 @@ App.Views.SessionView = Backbone.View.extend({
 		this.showCount();
 		this.hideBtnPrev();
 		this.hideBtnNext();
+
+		this.setStartData();
 	},
 
     onClick_stop : function(e){
@@ -107,6 +121,8 @@ App.Views.SessionView = Backbone.View.extend({
 		this.stopTimer();
 		this.resetTimer();
         this.checkBtn(this.currentQuestionIndex);
+
+        this.setStopData();
 	},
 
     onClick_result : function(e){
@@ -123,34 +139,39 @@ App.Views.SessionView = Backbone.View.extend({
 		return false;
 	},
 
+	resetEle: function(){
+		console.log("resetttttt", $('.swiper-slide'))
+        this.currentQuestionIndex = 0;
+        App.GlobalVars.current_q_index = 0;
+        this.checkBtn(0);
+        $('.swiper-slide').remove();
+        $(".swiper-wrapper").attr("style", "");
+        if(this.swiper) this.swiper.destroy();
+	},
+
     setEle : function(){
-		if(this.swiper) {
-            this.checkBtn(this.currentQuestionIndex);
-			return;
-        }
-    	App.GlobalVars.isShow_loading = false;
-        if(App.GlobalVars.isReset_session) this.currentQuestionIndex = 0;
         this.totalQuestion = App.GlobalVars.json_setting_data.qlist.length;
         this.maxTime = App.GlobalVars.json_setting_data.vtime;
 
-		var current = App.GlobalVars.current_session_index+1;
-		this.$el.find('.current').text(current);
+        var current = App.GlobalVars.current_session_index+1;
+        this.$el.find('.current').text(current);
 
-		var len = App.GlobalVars.json_setting_data.qlist.length;
+        var len = App.GlobalVars.json_setting_data.qlist.length;
 
-		for(var i = 0; i<len; i++){
+        for(var i = 0; i<len; i++){
             var ele = '<li class="swiper-slide" style="background: url('+App.GlobalVars.json_setting_data.qlist[i].qimg+') 0 0 no-repeat; background-size: cover;"></li>'
-			this.$el.find('.swiper-wrapper').append(ele);
+
+            this.$el.find('.swiper-wrapper').append(ele);
 
             if(i !=this.currentQuestionIndex){
-            	this.hideQuestion(i)
-			}
-		}
+                this.hideQuestion(i)
+            }
+        }
+
         this.checkBtn(this.currentQuestionIndex);
 
-
         this.swiper = new Swiper('.swiper-container', {
-               onSlideChangeEnd:this.onSwipeEnd
+            onSlideChangeEnd:this.onSwipeEnd
         });
 	},
 
@@ -282,9 +303,55 @@ App.Views.SessionView = Backbone.View.extend({
         $(".swiper-container").css("pointer-events", "auto")
 	},
 
+    setStartData : function(){
+        var url = App.GlobalVars.SET_ADMIN_VOTION_START_URL;
+        if(App.GlobalVars.isDebugMode) url = App.GlobalVars.DEBUG_SET_ADMIN_VOTION_START_URL;
+
+        var lstno = App.GlobalVars.json_setting_data.lstno;
+        var qno = App.GlobalVars.json_setting_data.qlist[App.GlobalVars.current_q_index].qno;
+        var qnum = App.GlobalVars.json_setting_data.qlist[App.GlobalVars.current_q_index].qnum;
+        var qopt = App.GlobalVars.json_setting_data.qlist[App.GlobalVars.current_q_index].qopt;
+        var data = {
+            "lstno":lstno,
+            "qno":qno,
+            "qnum":qnum,
+            "qopt":qopt
+        }
+
+        App.getJsonData(url, data, _.bind(this.onComplete_setStartData, this));
+    },
+
+    onComplete_setStartData: function(json){
+
+    },
+
+    setStopData : function(){
+        var url = App.GlobalVars.SET_ADMIN_VOTION_STOP_URL;
+        if(App.GlobalVars.isDebugMode) url = App.GlobalVars.DEBUG_SET_ADMIN_VOTION_STOP_URL;
+
+        var lstno = App.GlobalVars.json_setting_data.lstno;
+        var qno = App.GlobalVars.json_setting_data.qlist[App.GlobalVars.current_q_index].qno;
+        var qnum = App.GlobalVars.json_setting_data.qlist[App.GlobalVars.current_q_index].qnum;
+        var qopt = App.GlobalVars.json_setting_data.qlist[App.GlobalVars.current_q_index].qopt;
+        var data = {
+            "lstno":lstno,
+            "qno":qno,
+            "qnum":qnum,
+            "qopt":qopt
+        }
+
+        App.getJsonData(url, data, _.bind(this.onComplete_setStopData, this));
+    },
+
+    onComplete_setStopData: function(json){
+
+    },
+
+
+
     setEndData : function(){
-        var url = App.GlobalVars.SET_ADMIN_SESSION_START_URL;
-        if(App.GlobalVars.isDebugMode) url = App.GlobalVars.DEBUG_SET_ADMIN_SESSION_START_URL;
+        var url = App.GlobalVars.SET_ADMIN_SESSION_END_URL;
+        if(App.GlobalVars.isDebugMode) url = App.GlobalVars.DEBUG_SET_ADMIN_SESSION_END_URL;
 
         var lstno = App.GlobalVars.json_setting_data.lstno;
         var sessno = App.GlobalVars.current_session_index;
@@ -297,7 +364,6 @@ App.Views.SessionView = Backbone.View.extend({
     },
 
     onComplete_setEndData: function(json){
-
 		this.goMain();
     },
 

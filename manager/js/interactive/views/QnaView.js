@@ -62,7 +62,8 @@ App.Views.QnaView = Backbone.View.extend({
 		this.$el.find(".btn-current").on(App.GlobalVars.CLICK, _.bind(this.onClick_current, this))
 		this.$el.find(".btn-all").on(App.GlobalVars.CLICK, _.bind(this.onClick_all, this))
 
-		this.$el.find(".btn-close-qnapop").on(App.GlobalVars.CLICK, _.bind(this.onClick_close, this))
+		this.$el.find(".btn-close-qnapop").on(App.GlobalVars.CLICK, _.bind(this.onClick_pop_close, this))
+        this.$el.find(".top-area .btn-back").on(App.GlobalVars.CLICK, _.bind(this.onClick_close, this));
 	},
 
 	// 이벤트 제거
@@ -134,7 +135,11 @@ App.Views.QnaView = Backbone.View.extend({
 		return false;
 	},
 
-	onClick_close : function(){
+    onClick_close : function(){
+        this.goSession();
+    },
+
+	onClick_pop_close : function(){
 		this.hidePopup()
 		return false;
 	},
@@ -247,7 +252,12 @@ App.Views.QnaView = Backbone.View.extend({
             session = result.session6
         }
         return session
-	}
+	},
+
+    goSession : function(){
+        App.GlobalVars.isReset_session = false;
+        location.href = this.$el.find(".top-area .btn-back").attr("href");
+    }
 
 
 });

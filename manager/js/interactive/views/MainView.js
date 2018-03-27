@@ -30,7 +30,6 @@ App.Views.MainView = Backbone.View.extend({
 		var prev = prevPage.replace("#/", "")*/
 
 		// App.trigger(App.Events.SHOW_BTN_REFERENCE);
-		App.trigger(App.Events.SHOW_BTN_HOME);
 
 		this.checkSession();
 		this.setEle();
@@ -115,9 +114,12 @@ App.Views.MainView = Backbone.View.extend({
 	},
 
 	onClick_session : function(e){
+
 		var index = $(e.currentTarget).parent().index();
 		App.GlobalVars.current_session_index = index;
 		this.setSessionNum(index);
+
+        console.log("index : ", index)
 		return false;
 
 	},
