@@ -233,11 +233,15 @@ var App = new (Backbone.Router.extend({
         var w = $(window).width();
         var h = $(window).height();
 
+        var isPop = $("body").hasClass("show-popup");
+
         if(w > h){
             $("#no-btn").removeClass("hide");
         } else {
             $("#no-btn").addClass("hide");
         }
+
+
 
     },
 
