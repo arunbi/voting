@@ -25,11 +25,12 @@ App.Views.SessionView = Backbone.View.extend({
 		this.$el.removeClass("hide");
 		this.$el.on("webkitAnimationEnd", _.bind(this.showComplete, this));
 
-        if(prevPage == App.GlobalVars.ROUTER_RESULT || prevPage == App.GlobalVars.ROUTER_QNA){
 
+        if(prevPage == "#/"+App.GlobalVars.ROUTER_RESULT || prevPage == "#/"+App.GlobalVars.ROUTER_QNA){
+            console.log("prevPage : ", prevPage)
         } else {
             //reset
-
+            console.log("prevPage reset: ", prevPage)
             this.resetEle();
             this.setEle();
         }

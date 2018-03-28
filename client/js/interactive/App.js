@@ -74,8 +74,13 @@ var App = new (Backbone.Router.extend({
 
 		this.getData();
 
-        $(window).on("resize", _.bind(this.onResize, this));
-        this.onResize();
+        /*$(window).on("resize", _.bind(this.onResize, this));
+        this.onResize();*/
+/*
+        $(window).on( "orientationchange", function( event ) {
+            $( ".wrapper" ).text( "This device is in " + event.orientation + " mode!" );
+        });
+        $( window ).orientationchange();*/
         console.log("start")
 	},
 
@@ -235,10 +240,18 @@ var App = new (Backbone.Router.extend({
 
         var isPop = $("body").hasClass("show-popup");
 
+        $(".wrapper .qna-popup textarea").blur();
+        console.log($(".wrapper .qna-popup textarea"))
+
         if(w > h){
-            $("#no-btn").removeClass("hide");
+            // $("#no-btn").removeClass("hide");
+
+            $("body").addClass("show-alert")
         } else {
-            $("#no-btn").addClass("hide");
+            $("body").removeClass("show-alert")
+
+            // $("#no-btn").addClass("hide");
+
         }
 
 

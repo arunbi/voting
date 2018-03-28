@@ -29,8 +29,8 @@ a {
     /*background-color: #000000; opacity: 0.2;*/
 }
 
-#no-btn {position: absolute; top:0; right: 0; width: 100%; height: 100%; opacity: 1; z-index: 999999; background-color: #212121; }
-#no-btn img{position: relative; height: 100%; left: 50%; margin-left: -28%;}
+.no-btn {position: absolute; top:0; right: 0; width: 100%; height: 100%; opacity: 1; z-index: 999999; background-color: #212121; display: none}
+.no-btn img{position: relative; height: 100%; left: 50%; margin-left: -28%;}
 
 
 /* container */
@@ -164,6 +164,10 @@ a {
 .show-popup .wrapper { min-height: auto;}
 .show-popup .wrapper .dimmed {display: block;}
 
+.show-alert .wrapper {display: none;}
+.show-alert .no-btn {display: block;}
+
+
 @media screen and (min-width: 747px) {
     .wrapper {width: 747px; margin: 0 auto; padding: 50px 0 100px; min-height: auto;}
     .wrapper .screen-logo {height: 224px;}
@@ -182,6 +186,19 @@ a {
     .wrapper .complete-popup {position: fixed; left: 50%; top: 50%; width: 676px; height: 312px; margin-top: -156px; margin-left: -338px;}
     .wrapper .complete-popup .message {height: 208px; font-size: 33px; line-height: 208px; border-radius: 10px 10px 0 0;}
     .wrapper .complete-popup .btn-confirm {font-size: 33px; line-height: 104px; border-radius: 0 0 10px 10px;}
+}
+
+/* portrait */
+@media screen and (orientation:portrait) {
+    /* portrait-specific styles */
+    .no-btn {display: none;}
+    .wrapper {display: block;}
+}
+/* landscape */
+@media screen and (orientation:landscape) {
+    /* landscape-specific styles */
+    .no-btn {display: block;}
+    .wrapper {display: none;}
 }
 
 
