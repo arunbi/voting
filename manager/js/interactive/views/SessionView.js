@@ -27,10 +27,11 @@ App.Views.SessionView = Backbone.View.extend({
 
 
         if(prevPage == "#/"+App.GlobalVars.ROUTER_RESULT || prevPage == "#/"+App.GlobalVars.ROUTER_QNA){
-            console.log("prevPage : ", prevPage)
+            // console.log("prevPage : ", prevPage)
+            this.checkBtn(this.currentQuestionIndex);
         } else {
             //reset
-            console.log("prevPage reset: ", prevPage)
+            // console.log("prevPage reset: ", prevPage)
             this.resetEle();
             this.setEle();
         }
